@@ -1,4 +1,4 @@
-const basicCard = function(front, back) {
+const BasicCard = function(front, back) {
 	this.front = front;
 	// process.argv[2]
 	this.back = back;
