@@ -1,0 +1,6 @@
+theHulk = new clozeCard('the Hulk was originally grey, but became green to compensate for poor color separation in print.', 'the Hulk');
+
+theHulk = new clozeCard('the Hulk was originally grey, but became green to compensate for poor color separation in print.', 'the Hulk');
+
+theHulk.partialText();
+theHulk.answer(); 

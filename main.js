@@ -3,18 +3,47 @@
 // import the JS
 // var basicCard = require('./basicCard.js');
 var clozeCard = require('./clozeCard');
-var replace = require('./replace')
 
-var firstPresident = new clozeCard('was the first president of the United States?', 'George Washington ');
+var inquirer = require('inquirer');
+var fs = require("fs");
 
-// "Who was the first president of the United States?"
-firstPresident.clozeDelete(); 
+// var fileRead = function(dataType){
+// 	fs.readFile('flashcards.JSON', JSON.stringify(dataType, null, 2), (err) => {
+// 		if (err) {
+// 			console.log('New Info has been logged!');
+// 		} else {
+// 			console.log()
+// 		}
+// 	});	
+// }
 
-var replaceQuestion1 = new replace(firstPresident.text) 
-console.log(replaceQuestion1);
-// Should throw or log an error because "oops" doesn't appear in "This doesn't work"
-// var brokenCloze("This doesn't work", "oops"); 
+// var text = new ClozeCard {
+// 	'some information'
+// }
+
+count = 0;
+
+var askQuestion = function(){
+		inquirer.prompt([
+			{
+				type: 'input',
+				message: clozeCard.hulk.partialText(),
+				name: 'hulk'
+			},
+			{
+				type: 'input',
+				message: 'name of the variable',
+				name: 'spiderman'
+			},
+			{
+
+			}
+		]).then(function(answer){
+			hulk.text();
+		})
+	}
+
+askQuestion();
 
 
-// var inquirer = require('inquirer');
 

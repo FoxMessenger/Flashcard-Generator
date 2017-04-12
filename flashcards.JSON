@@ -1,0 +1,31 @@
+
+{
+	"flashcards": [
+		{
+			"id": "hulk",
+			"front": "the Hulk was originally grey, but became green to compensate for poor color separation in print.", 
+			"back": "the Hulk"	
+		},
+		{
+			"id": "spider-man",
+			"front": "Stan Lee put a hyphen in Spider-Man’s name so it would look different from Superman in print.",
+			"back": "Spider-Man"
+		},
+		{
+			"id": "gi-joe",
+			"front": "G.I. Joe was originally intended as a new direction for Nick Fury and S.H.I.E.L.D.",
+			"back": "G.I. Joe"	
+		},
+		{
+			"id": "zombie",
+			"front": "Marvel Comics owned the rights to the word zombie from 1975 through 1996, until they realized it was impossible to enforce the trademark.",
+			"back": "zombie"	
+		}
+	]
+}
+
+
+
+
+// Should throw or log an error because "oops" doesn't appear in "This doesn't work"
+// var brokenCloze("This doesn't work", "oops"); 
