@@ -6,4 +6,4 @@ const BasicCard = function(front, back) {
 
 }
 
-module.exports = basicCard;
+module.exports = BasicCard;

@@ -1,49 +1,81 @@
 // This app will create a series of flashcards in 2 manners.
 
-// import the JS
-// var basicCard = require('./basicCard.js');
-var clozeCard = require('./clozeCard');
-
+// NPM require 
+var basicCard = require('./basicCard');
 var inquirer = require('inquirer');
 var fs = require("fs");
 
-// var fileRead = function(dataType){
-// 	fs.readFile('flashcards.JSON', JSON.stringify(dataType, null, 2), (err) => {
-// 		if (err) {
-// 			console.log('New Info has been logged!');
-// 		} else {
-// 			console.log()
-// 		}
-// 	});	
-// }
+// variables for switch cases
+var count = 0;
+var rightAnswers = 0;
+var wrongAnswer = 0;
 
-// var text = new ClozeCard {
-// 	'some information'
-// }
-
-count = 0;
-
-var askQuestion = function(){
+var startGame = function(){
 		inquirer.prompt([
 			{
-				type: 'input',
-				message: clozeCard.hulk.partialText(),
-				name: 'hulk'
+				type: 'list',
+				message: "Please choose basic or advanced:",
+				choices: ['basic', 'advanced'],
+				name: 'choice'
 			},
-			{
-				type: 'input',
-				message: 'name of the variable',
-				name: 'spiderman'
-			},
-			{
-
-			}
 		]).then(function(answer){
-			hulk.text();
+			switch(answer.choice) {
+				case 'basic':
+					console.log('This is the basic promp!')
+					// basicChoice.prompt();
+				break;
+
+				case 'advanced':
+					console.log('This is the cloze prompt!')
+					// cloze.prompt();
+				break;
+			}
 		})
 	}
 
-askQuestion();
+// ========
+// SWITCH: BASIC
+// ========
+
+var basicChoice = {
+	prompt: function(){
+		inquirer.prompt([
+			{
+				type: 'input',
+				message: clozeCard.hulk(),
+				name: 'question'
+			}
+		]).then(function(answer){
+			if (answer === clozeCard.cloze) {
+				console.log('Good job!')
+			} else {
+				console.log('Sorry, that\'s the wrong answer.')
+			}
+		})
+	}
+
+}
+
+
+var basicQuestions = function(){
+	for (var hulk in basicCard) {
+	console.log("a " + key + " band is " + music[key] + ".");	
+}
+}
+// ========
+// SWITCH: ADVANCED
+// ========
+
+function addQuestions(id, front, back) {
+	this.id = id;
+	this.front = front;
+	this.back = back;
+
+	this.flashcards = [];
+}
+
+// Start Program
+startGame();
 
 
 
