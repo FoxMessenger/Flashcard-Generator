@@ -13,18 +13,7 @@ function ClozeCard (text, cloze) {
 	this.partialText = function() {
 		// only what we want to see, minus the answer
 		console.log(text.replace(cloze, ' ... '));
-		
-		// IF I WANT TO USE A REDACTING OPTION
-			// var redact = function(){
-			// 	var result = "";
-			// 	for (var i = 0; i < text.length; i++){
-			// 		result += "\u2588";
-			// 	}
-			// 	return result;
-			// }
-			// console.log(text.replace(cloze, redact));
 	}
 }
-
 
 module.exports = ClozeCard;
