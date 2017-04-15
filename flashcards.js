@@ -21,15 +21,15 @@ exports.clozeCard = [
 		cloze: "Deathstroke"	
 	},
 	{
-		text: "\n ===========================\n| Stan Lee appears as a cameo    |\n| in almost every Marvel    |\n| super hero movie.         | \n ===========================\n ",
+		text: "\n ===========================\n| Stan Lee appears as a cameo    |\n| in almost every Marvel    |\n| super hero movie.         | \n ===========================\n Your Answer: ",
 		cloze: "Stan Lee"
 	},
 	{
-		text: "\n ==================================\n| Though Superman's main weakness  |\n| is kryptonite, Superman's        |\n| invulnerability offers no        |\n| protection against magic.          |\n ==================================\n",
+		text: "\n ==================================\n| Though Superman's main weakness  |\n| is kryptonite, Superman's        |\n| invulnerability offers no        |\n| protection against magic.          |\n ==================================\n Your Answer: ",
 		cloze: "magic"	
 	},
 	{
-		text: "\n ==================================\n| Cyclops, of the X-Men, kills Xavier  |\n| and attacks Emma Frost,          |\n| absorbing her portion of the     |\n| Phoenix Force and elevating to   |\n| Dark Phoenix.                    |\n ==================================\n",
+		text: "\n ==================================\n| Cyclops, of the X-Men, kills Xavier  |\n| and attacks Emma Frost,          |\n| absorbing her portion of the     |\n| Phoenix Force and elevating to   |\n| Dark Phoenix.                    |\n ==================================\n Your Answer: ",
 		cloze: "Cyclops"
 	},
 	{

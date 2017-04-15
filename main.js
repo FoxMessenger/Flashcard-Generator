@@ -177,15 +177,16 @@ function clozeChoice() {
 				console.log("");
 				console.log('Right Answers: ' + rightAnswers);
 				console.log('Wrong Answers: ' + wrongAnswers);
+				console.log('CORRECT ANSWER: ' + clozeFront);
 
 			} else {
 				console.log("");
-				console.log('Sorry, wrong answer.');
-				console.log('CORRECT ANSWER: ' + clozeBack);
+				console.log('CORRECT ANSWER: ' + clozeFront);
 				wrongAnswers++;
 				console.log("");
 				console.log('Right Answers: ' + rightAnswers);
 				console.log('Wrong Answers: ' + wrongAnswers);
+
 			}
 			counter++;
 			clozeChoice();
