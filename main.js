@@ -1,18 +1,37 @@
 // This app will create a series of flashcards in 2 manners.
 
-// NPM require 
+// ================================
+// 			NPM REQUIRES
+// ================================
+
 var flashcards = require('./flashcards.js');
 var inquirer = require('inquirer');
 var BasicCard = require('./BasicCard.js');
 var ClozeCard = require('./ClozeCard.js');
 // var fs = require("fs");
 
+// ================================
+// 		   GLOBAL VARIABLES
+// ================================
 var counter;
 var rightAnswers;
 var wrongAnswers; 
+// If on Mac, this will clear the window
+console.reset = function () {
+	console.log("");
+    console.log("");
+    console.log('no worries, maybe next time. Goodbye.')
+    console.log("");
+    console.log("");
+    
+    setTimeout(function () {
+  		return process.stdout.write('\033c');
+	}, 1000);
+  	
+}
 
 // ================================
-//
+// 			INITIAL START
 // ================================
 
 var startGame = function(){
@@ -21,6 +40,10 @@ var startGame = function(){
 	wrongAnswers = 0;
 	startInquirer();
 }
+
+// ================================
+// 		    INITIAL INQUIRE
+// ================================
 
 var startInquirer = function() {	
 	inquirer.prompt([
@@ -44,6 +67,7 @@ var startInquirer = function() {
 		}
 	})
 }
+
 // ================================
 // ================================
 //    SWITCH CASE: BASIC OPTION
@@ -51,11 +75,11 @@ var startInquirer = function() {
 // ================================
 
 var basicChoice = function() { 
-	// Basic Construct for front (question) and back (answer) of card
+	// Basic Construct for front (question) and back (answer) of flashcard
 	var cardFront = Object.keys(flashcards.basicCard)[counter];
 	var cardBack = Object.values(flashcards.basicCard)[counter];
 
-	if (counter < 4) {
+	if (counter < 5) {
 		inquirer.prompt([
 			{
 				name: 'answer',
@@ -66,34 +90,44 @@ var basicChoice = function() {
 			}
 		]).then(function(result){
 			var newFlashcard = new BasicCard(cardFront, cardBack);
-			
 			// console.log(newFlashcard);
 			// console.log(newFlashcard.front)
 			// console.log(cardFront);
 			
 			if (result.answer.toLowerCase() == newFlashcard.back) {
 				console.log('That\'s correct');
+
 				// console.log('The answer was: ' + newFlashcard.back);
 				rightAnswers++;
+			
+			    console.log('right answers: ' + rightAnswers);
+			    console.log("");
+			    console.log('wrong answers: ' + wrongAnswers);
+			
 
 			} else {
 				
 				console.log('Sorry, that\'s the wrong answer.');
-				// console.log('your answer was: ' + result + '. The answer was: ' + newFlashcard.back);
+				console.log('The answer was: ' + newFlashcard.back);
 				wrongAnswers++;
+
+			    console.log('right answers: ' + rightAnswers);
+			    console.log("");
+			    console.log('wrong answers: ' + wrongAnswers);
+				
 			}
-			
-			console.log("===========================\n");
-		    console.log('right answers: ' + rightAnswers);
-		    console.log("");
-		    console.log('wrong answers: ' + wrongAnswers);
-			console.log("===========================");
 			
 			counter++;
 			basicChoice();
-			
 		})		
 	} else {
+		console.log("===========================\n");
+		console.log("");
+    	console.log('right answers: ' + rightAnswers);
+    	console.log("");
+    	console.log('wrong answers: ' + wrongAnswers);
+    	console.log("");
+		console.log("===========================");
 		inquirer.prompt([
 			{
 				type: 'confirm',
@@ -104,15 +138,9 @@ var basicChoice = function() {
 		]).then(function(choice){
 			if (choice.confirm) {
 				startGame();
-				// console.log(counter);
 
 			} else {
-				console.log("");
-			    console.log("");
-			    console.log('no worries, maybe next time.')
-			    console.log("");
-			    console.log("");
-				
+				console.reset();
 			}
 		})
 	}
@@ -123,20 +151,17 @@ var basicChoice = function() {
 // ================================
 // ================================
 function clozeChoice() {
-	
-	var clozeFront = flashcards.clozeCard[counter].text;
-	var clozeBack = flashcards.clozeCard[counter].cloze;
-	var clozeFlashcards = new ClozeCard(clozeFront, clozeBack);
 
+	// 	This doesn't work inside the `message` parameter
 	// ClozeCard.prototype.partialText = function() {
-	// 	// only what we want to see, minus the answer
 		// this.text.replace(this.cloze, '...')
-		
 	// };
 	
+	if (counter < flashcards.clozeCard.length) {
+		var clozeFront = flashcards.clozeCard[counter].text;
+		var clozeBack = flashcards.clozeCard[counter].cloze;
+		var clozeFlashcards = new ClozeCard(clozeFront, clozeBack);
 
-
-	if (counter < 5) {
 		inquirer.prompt([
 			{
 				name: 'answer',
@@ -146,6 +171,7 @@ function clozeChoice() {
 		]).then(function(result){
 			
 			if (result.answer.toLowerCase() == clozeBack.toLowerCase()) {
+				console.log("");
 				console.log('That\'s correct');
 				rightAnswers++;
 				console.log("");
@@ -153,21 +179,20 @@ function clozeChoice() {
 				console.log('Wrong Answers: ' + wrongAnswers);
 
 			} else {
-				
-				console.log('Sorry, that\'s the wrong answer.');
-				console.log('The answer was: ' + clozeBack);
+				console.log("");
+				console.log('Sorry, wrong answer.');
+				console.log('CORRECT ANSWER: ' + clozeBack);
 				wrongAnswers++;
 				console.log("");
 				console.log('Right Answers: ' + rightAnswers);
 				console.log('Wrong Answers: ' + wrongAnswers);
 			}
-
 			counter++;
 			clozeChoice();
-			// console.log(clozeFlashcards.partialText());
+		});	
 
-		})	
   	} else {
+  		// this point here will not process because of an unknown undefined to text
 		inquirer.prompt([
 			{
 				type: 'confirm',
@@ -181,11 +206,7 @@ function clozeChoice() {
 				// console.log(counter);
 
 			} else {
-				console.log("");
-			    console.log("");
-			    console.log('no worries, maybe next time.')
-			    console.log("");
-			    console.log("");
+				console.reset();
 				
 			}
 		})
