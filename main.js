@@ -38,22 +38,21 @@ var startInquirer = function() {
 			break;
 
 			case 'cloze':
-				console.log('This is the cloze prompt!')
-				// cloze.prompt();
+				clozeChoice()
+				// cloze.prompt('This is the cloze prompt!');
 			break;
 		}
 	})
 }
 // ================================
 // ================================
-//      SWITCH: BASIC OPTION
+//    SWITCH CASE: BASIC OPTION
 // ================================
 // ================================
 
 var basicChoice = function() { 
-	// Basic Construct
+	// Basic Construct for front (question) and back (answer) of card
 	var cardFront = Object.keys(flashcards.basicCard)[counter];
-
 	var cardBack = Object.values(flashcards.basicCard)[counter];
 
 	if (counter < 4) {
@@ -74,18 +73,22 @@ var basicChoice = function() {
 			
 			if (result.answer.toLowerCase() == newFlashcard.back) {
 				console.log('That\'s correct');
-				console.log('The answer was: ' + newFlashcard.back);
+				// console.log('The answer was: ' + newFlashcard.back);
 				rightAnswers++;
 
 			} else {
-			
+				
 				console.log('Sorry, that\'s the wrong answer.');
-				console.log('your answer was: ' + result + '. The answer was: ' + newFlashcard.back);
+				// console.log('your answer was: ' + result + '. The answer was: ' + newFlashcard.back);
 				wrongAnswers++;
 			}
 			
-			// console.log('right answers: ' + rightAnswers);
-			// console.log('wrong answers: ' + wrongAnswers);
+			console.log("===========================\n");
+		    console.log('right answers: ' + rightAnswers);
+		    console.log("");
+		    console.log('wrong answers: ' + wrongAnswers);
+			console.log("===========================");
+			
 			counter++;
 			basicChoice();
 			
@@ -106,7 +109,7 @@ var basicChoice = function() {
 			} else {
 				console.log("");
 			    console.log("");
-			    console.log('not worries, maybe next time.')
+			    console.log('no worries, maybe next time.')
 			    console.log("");
 			    console.log("");
 				
@@ -116,15 +119,46 @@ var basicChoice = function() {
 }
 // ================================
 // ================================
-// SWITCH: 'CLOZE' OPTION
+//   SWITCH CASE: 'CLOZE' OPTION
 // ================================
 // ================================
-function listAdvanced() {
+function clozeChoice() {
 	
-	for (var key in clozeQuestions) {
-		for (i = 0; i < 4; i++)
-  		console.log(clozeQuestions[i].front);
-  		
+	var cardFront = flashcards.clozeCard[counter].text;
+	var cardBack = flashcards.clozeCard[counter].cloze;
+	var clozeFlashcards = new ClozeCard(cardFront, cardBack);
+
+	ClozeCard.prototype.partialText = function() {
+		// only what we want to see, minus the answer
+		this.text.replace(this.cloze, '...');
+	};
+	
+	if (counter < 4) {
+		inquirer.prompt([
+			{
+				name: 'answer',
+				type: 'input',
+				message: clozeFlashcards.partialText()
+			}
+		]).then(function(result){
+			
+			if (result.answer.toLowerCase() == cardBack) {
+				console.log('That\'s correct');
+				// console.log('The answer was: ' + newFlashcard.back);
+				rightAnswers++;
+
+			} else {
+				
+				console.log('Sorry, that\'s the wrong answer.');
+				// console.log('your answer was: ' + result + '. The answer was: ' + newFlashcard.back);
+				wrongAnswers++;
+			}
+
+			counter++;
+			basicChoice();
+			console.log(clozeFlashcards.partialText());
+
+		})	
   	}
 };
 

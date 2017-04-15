@@ -10,10 +10,7 @@ function ClozeCard (text, cloze) {
 		console.log(cloze);
 	};
 
-	this.partialText = function() {
-		// only what we want to see, minus the answer
-		console.log(text.replace(cloze, ' ... '));
-	}
-}
+	
+};
 
 module.exports = ClozeCard;
