@@ -124,42 +124,72 @@ var basicChoice = function() {
 // ================================
 function clozeChoice() {
 	
-	var cardFront = flashcards.clozeCard[counter].text;
-	var cardBack = flashcards.clozeCard[counter].cloze;
-	var clozeFlashcards = new ClozeCard(cardFront, cardBack);
+	var clozeFront = flashcards.clozeCard[counter].text;
+	var clozeBack = flashcards.clozeCard[counter].cloze;
+	var clozeFlashcards = new ClozeCard(clozeFront, clozeBack);
 
-	ClozeCard.prototype.partialText = function() {
-		// only what we want to see, minus the answer
-		this.text.replace(this.cloze, '...');
-	};
+	// ClozeCard.prototype.partialText = function() {
+	// 	// only what we want to see, minus the answer
+		// this.text.replace(this.cloze, '...')
+		
+	// };
 	
-	if (counter < 4) {
+
+
+	if (counter < 5) {
 		inquirer.prompt([
 			{
 				name: 'answer',
 				type: 'input',
-				message: clozeFlashcards.partialText()
+				message: clozeFlashcards.text.replace(clozeFlashcards.cloze, '...')
 			}
 		]).then(function(result){
 			
-			if (result.answer.toLowerCase() == cardBack) {
+			if (result.answer.toLowerCase() == clozeBack.toLowerCase()) {
 				console.log('That\'s correct');
-				// console.log('The answer was: ' + newFlashcard.back);
 				rightAnswers++;
+				console.log("");
+				console.log('Right Answers: ' + rightAnswers);
+				console.log('Wrong Answers: ' + wrongAnswers);
 
 			} else {
 				
 				console.log('Sorry, that\'s the wrong answer.');
-				// console.log('your answer was: ' + result + '. The answer was: ' + newFlashcard.back);
+				console.log('The answer was: ' + clozeBack);
 				wrongAnswers++;
+				console.log("");
+				console.log('Right Answers: ' + rightAnswers);
+				console.log('Wrong Answers: ' + wrongAnswers);
 			}
 
 			counter++;
-			basicChoice();
-			console.log(clozeFlashcards.partialText());
+			clozeChoice();
+			// console.log(clozeFlashcards.partialText());
 
 		})	
-  	}
+  	} else {
+		inquirer.prompt([
+			{
+				type: 'confirm',
+				message: "Want to play again?",
+				name: 'confirm',
+				default: true				
+			}
+		]).then(function(choice){
+			if (choice.confirm) {
+				startGame();
+				// console.log(counter);
+
+			} else {
+				console.log("");
+			    console.log("");
+			    console.log('no worries, maybe next time.')
+			    console.log("");
+			    console.log("");
+				
+			}
+		})
+	}
 };
 
 // Start Program
